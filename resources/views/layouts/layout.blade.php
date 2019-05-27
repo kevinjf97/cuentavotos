@@ -5,55 +5,43 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         {!! Html::style('../node_modules/bootstrap/dist/css/bootstrap.min.css') !!}
         {!! Html::script('../node_modules/bootstrap/dist/js/bootstrap.min.js') !!}
+        {!! Html::style('../node_modules/bootstrap/dist/css/bootstrap.min.css') !!}
+        {!! Html::style('/css/app.css') !!}
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <title>CuentaVotos - UP</title>
     </head>
     <body>
         <header>
-            <?php
-                function activeMenu($url){
-                    return request()->is($url) ? 'active' : '';
-                }
-            ?>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="col-md-6">
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        @if(auth()->guest())
-                            <li class="nav-item">
-                                <a href="" class="nav-link" >Ingresar</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{  auth()->user()->name  }}</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        @if(auth()->user()->admin == 'true')
-                                            <a href="" class="btn btn-link">Administración</a>
-                                            <hr>
-                                        @endif
-                                        <a href="" class="dropdown-item" >Perfil</a>
-                                        <a href="" class="dropdown-item" >Editar datos personales</a>
-                                    </li>
-                                    <li>
-                                        <hr>
-                                        {{ Form::open(array('route'=>'logout', 'method'=>'post', 'onsubmit'=>'return true;', "style" => "margin:0px;")) }}
-                                            <button type="submit" class="btn btn-link">Cerrar sesión</button>
-                                        {{  Form::close()  }}
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </div>
+            <div class="container">
+                <div class="barra">
+                    <a href="index.html">
+                        <img src="img/logo-2.png" alt="Logotipo de CuentaVotos">
+                    </a>
+                    @if(auth()->guest())
+
+                    @else
+                        <nav class="navegacion" id="navegacion">
+                            <a href="nosotros.html">Nosotros</a>
+                            <a href="blog.html">Blog</a>
+                            <a href="anuncios.html">Anuncios</a>
+                            <a href="contacto.html">Contacto</a>
+                            {{ Form::open(array('route'=>'logout', 'method'=>'post', 'onsubmit'=>'return true;', "style" => "margin:0px;")) }}
+                                <button type="submit" class="btn btn-link">Cerrar sesión</button>
+                            {{  Form::close()  }}
+                        </nav>
+                    @endif
                 </div>
-            </nav>
+            </div>
         </header>
         <div class="container">
             @yield('contenido')
         </div>
 
-        <footer class="footer-b">
-            <p class="copyright">Kevin Firmani - 2018 ® &copy;</p>
+        <footer class="site-footer">
+            <div class="container container-footer">
+                <p class="copyright">Sitio desarrollado por <a target="_blanck" href="https://www.mastercode.site">Master Code</a>. Todos los derechos reservados. 2019 &copy; &reg;</p>
+            </div>
         </footer>
     </body>
 </html>
